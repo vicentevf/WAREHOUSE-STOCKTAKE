@@ -631,22 +631,22 @@
         const btnGrid = document.getElementById('view-mode-grid');
         const btnBlueprint = document.getElementById('view-mode-blueprint');
         const gridContainer = document.getElementById('grid-map-container');
-        // Reset Progress (Explicit User Action Only)
-        document.getElementById('btn-reset').addEventListener('click', () => {
-            if (confirm("Are you sure you want to reset all checked locations? This cannot be undone.")) {
-                auditState = {};
-                localStorage.removeItem('wh_audit_state_v1');
-                renderMap();
-                showToast("All progress has been reset.", "info");
-            }
-        });
+        const blueprintContainer = document.getElementById('blueprint-map-container');
 
+        // View Switcher Event Handlers
         btnBlueprint.addEventListener('click', () => {
             btnBlueprint.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 bg-brand-600 text-white shadow";
             btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 text-slate-400 hover:text-white transition";
             gridContainer.classList.add('hidden');
             blueprintContainer.classList.remove('hidden');
             renderBlueprintPins();
+        });
+
+        btnGrid.addEventListener('click', () => {
+            btnGrid.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 bg-brand-600 text-white shadow";
+            btnBlueprint.className = "px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2 text-slate-400 hover:text-white transition";
+            blueprintContainer.classList.add('hidden');
+            gridContainer.classList.remove('hidden');
         });
 
         // Zoom Controls
